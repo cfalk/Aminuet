@@ -26,13 +26,11 @@ function makeNewSequence() {
   $("#sequenceContainer").append(newSeq);
 }
 $("#button-newSequence").click(makeNewSequence);
+$("#button-playAll").click(playAllSequences);
+
 $(document).on("click", ".button-play", function() {
   var $seqContainer = $(this).closest(".sequence");
-  var duration = $seqContainer.data("duration");
-  if (duration===undefined) duration = 1000;
-
-  var soundSeq = $seqContainer.data("soundSeq");
-  playTones(soundSeq, duration);
+  playSequence($seqContainer);
 });
 
 // Initial Page Setup
