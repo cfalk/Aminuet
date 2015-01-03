@@ -1,0 +1,32 @@
+
+.sequence {
+ height:3em;
+}
+.sequence.error {
+ background-color:red;
+}
+
+.sequence .musicControl {
+ display:inline-block;
+ box-sizing:border-box;
+ width:100px;
+ height:100%;
+ vertical-align:top;
+}
+.sequence textarea {
+ box-sizing:border-box;
+ resize:none;
+ height:100%;
+ overflow-y:auto;
+}
+.sequence .soundTranslation {
+ display:inline-block;
+ box-sizing:border-box;
+ overflow-x:auto;
+ width:200px;
+ height:100%;
+ vertical-align:top;
+}
+.musicControl .button-play {
+ height:100%;
+}
