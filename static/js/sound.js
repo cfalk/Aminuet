@@ -2,12 +2,14 @@
 // Create one global context.
 var audioContext = new webkitAudioContext();
 
+
 function playTone(tone, duration) {
   if (tone===undefined) throw "No tone specified!";
 
   // Largely based on code from: http://patorjk.com/blog/2012/07/22/tone-playing-experiment-with-html5s-web-audio-api/
   var oscillator = audioContext.createOscillator();
   oscillator.frequency.value = toneToFrequencyMap[tone];
+  oscillator.type = "square";
   oscillator.connect(audioContext.destination);
   oscillator.noteOn && oscillator.noteOn(0);
 
@@ -16,6 +18,7 @@ function playTone(tone, duration) {
     oscillator.disconnect();
   }, duration);
 }
+
 
 function playTones(toneSeq, duration) {
   playTone(toneSeq.shift(), duration);
@@ -26,6 +29,7 @@ function playTones(toneSeq, duration) {
   }, duration);
 }
 
+
 function playSequence(seqContainer) {
   var $seqContainer = $(seqContainer);
   var duration = $seqContainer.data("duration");
@@ -34,6 +38,7 @@ function playSequence(seqContainer) {
   var soundSeq = $seqContainer.data("soundSeq").slice();
   playTones(soundSeq, duration);
 }
+
 
 function playAllSequences() {
   $(".sequence").each(function() {
