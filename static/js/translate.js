@@ -41,8 +41,10 @@ function translateSequence(sequenceContainer) {
     var AASeq = nucleotidesToAA(codonSeq);
     var soundSeq = AAToSounds(AASeq);
     $sequenceContainer.data("soundSeq", soundSeq);
-    $sequenceContainer.find(".soundTranslation").html(soundSeq.join(", "));
     $sequenceContainer.removeClass("error");
+
+    // Apply the initial visualization.
+    drawSequenceVisual($sequenceContainer);
 
   } catch (err) {
     if ((typeof console) !== "undefined") console.log(err);

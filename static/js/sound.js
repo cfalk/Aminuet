@@ -32,11 +32,18 @@ function playTone(tone, duration) {
 }
 
 
-function playTones(toneSeq, duration) {
+function playTones(toneSeq, duration, seqContainer) {
+  if (seqContainer!==undefined) {
+    stepVisual(seqContainer);
+  }
+
   playTone(toneSeq.shift(), duration);
+
   setTimeout(function() {
     if (toneSeq.length) {
-      playTones(toneSeq, duration);
+      playTones(toneSeq, duration, seqContainer);
+    } else {
+      if (seqContainer!==undefined) clearVisual(seqContainer);
     }
   }, duration);
 }
@@ -64,9 +71,9 @@ function playSequence(seqContainer) {
       }, sequenceDuration);
     }
 
-    playTones(soundSeq, duration);
+    playTones(soundSeq, duration, $seqContainer);
   } catch(err) {
-
+    console.log(err);
   }
 }
 

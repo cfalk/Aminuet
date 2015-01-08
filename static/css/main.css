@@ -47,6 +47,7 @@ body {
  letter-spacing:2px;
 }
 .sequence .soundTranslation {
+ position:relative;
  display:inline-block;
  box-sizing:border-box;
  overflow-x:auto;
@@ -87,4 +88,16 @@ body {
 div[class^="button-"]:hover, div[id^="button-"]:hover {
  opacity:0.8;
  cursor:pointer;
+}
+
+
+/* Visualization */
+.visualBox {
+ position:absolute;
+}
+.visualBox.active {
+ background-color:red !important;
+}
+.visualBox.rest {
+ opacity:0;
 }

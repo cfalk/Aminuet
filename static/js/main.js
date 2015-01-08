@@ -40,6 +40,12 @@ $(document).on("click", ".button-play", function() {
   playSequence($seqContainer);
 });
 
+$(document).on("change", ".bpm", function() {
+  var val = $(this).val();
+  if (val>260) $(this).val(260);
+  if (val<1) $(this).val(1);
+});
+
 // Initial Page Setup
 makeNewSequence();
 
