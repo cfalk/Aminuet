@@ -86,7 +86,7 @@ var AAToSoundMap = {
   "proline":"F4",
   "tryptophan":"G4",
   "tyrosine":"A4",
-  "stop codon":"B4"
+  "stop codon":"--"
 };
 
 

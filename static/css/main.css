@@ -16,7 +16,7 @@ body {
 .sequence {
  height:3em;
 }
-.sequence.error {
+.sequence.error textarea {
  background-color:red;
 }
 

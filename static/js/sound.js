@@ -5,6 +5,7 @@ var audioContext = new webkitAudioContext();
 
 function playTone(tone, duration) {
   if (tone===undefined) throw "No tone specified!";
+  if (tone==="--") return; // "--" is used to indicate a rest.
 
   // Largely based on code from: http://patorjk.com/blog/2012/07/22/tone-playing-experiment-with-html5s-web-audio-api/
   var gain = audioContext.createGain();
