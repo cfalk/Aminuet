@@ -71,22 +71,22 @@ var AAToSoundMap = {
   "aspartic acid":"E2",
   "valine":"F2",
   "serine":"G2",
-  "threonine":"A3",
-  "glycine":"B3",
+  "threonine":"A2",
+  "glycine":"B2",
   "arginine":"C3",
   "asparagine":"D3",
   "cysteine":"E3",
   "glutamic acid":"F3",
   "glutamine":"G3",
-  "histidine":"A4",
-  "isoleucine":"B4",
+  "histidine":"A3",
+  "isoleucine":"B3",
   "lysine":"C4",
   "methionine":"D4",
   "phenylalanine":"E4",
   "proline":"F4",
   "tryptophan":"G4",
-  "tyrosine":"A5",
-  "stop codon":"B5"
+  "tyrosine":"A4",
+  "stop codon":"B4"
 };
 
 

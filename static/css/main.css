@@ -20,12 +20,23 @@ body {
  background-color:red;
 }
 
+.sequence input {
+ vertical-align:top;
+ height:100%;
+ width:4em;
+ text-align:center;
+ color:inherit;
+ font:inherit;
+ margin-left:0.3em;
+ padding-left:0.75em;
+ border:none;
+ background-color:#051938;
+}
 .sequence textarea {
  box-sizing:border-box;
  resize:none;
  height:100%;
  overflow-y:auto;
- border-radius:3px;
  padding:0.9em;
 
  border:none;
@@ -42,6 +53,8 @@ body {
  width:200px;
  height:100%;
  vertical-align:top;
+ color:black;
+ background-color:white;
 }
 .musicControl {
  display:inline-block;
@@ -51,14 +64,27 @@ body {
  vertical-align:top;
  padding:0px 0.25em;
 }
-.musicControl .button-play {
- border-top: 30px solid transparent;
- border-left: 60px solid #051938;
- border-bottom: 30px solid transparent;
+.musicControl div[class^="button-"].inactive {
+ opacity:0.1;
+}
+.musicControl div[class^="button-"] {
+ font-size:1.4em;
+ line-height:1em;
+}
+.musicControl .button-play, #button-playAll {
+ border-top: 15px solid transparent;
+ border-left: 30px solid #051938;
+ border-bottom: 15px solid transparent;
  display:inline-block;
  opacity:0.6;
- cursor:pointer;
 }
-.musicControl .button-play:hover {
+#button-newSequence {
+ display:inline-block;
+ font-size:3em;
+ line-height:30px;
+ vertical-align:top;
+}
+div[class^="button-"]:hover, div[id^="button-"]:hover {
  opacity:0.8;
+ cursor:pointer;
 }

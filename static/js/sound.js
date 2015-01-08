@@ -43,11 +43,30 @@ function playTones(toneSeq, duration) {
 
 function playSequence(seqContainer) {
   var $seqContainer = $(seqContainer);
-  var duration = $seqContainer.data("duration");
-  if (duration===undefined) duration = 1000;
 
-  var soundSeq = $seqContainer.data("soundSeq").slice();
-  playTones(soundSeq, duration);
+  // See if this sequence should be looped.
+  var loop = $seqContainer.find(".button-loop").hasClass("active");
+
+  // Calculate the duration of each note in this sequence.
+  var bpm = $seqContainer.find(".bpm").val();
+  if (bpm===undefined) bpm = 60;
+  var duration = 60/bpm*1000 // In milliseconds.
+
+  try {
+    var soundSeq = $seqContainer.data("soundSeq").slice();
+
+    // Call the function after if `loop` is true.
+    if (loop) {
+      var sequenceDuration = soundSeq.length*duration;
+      setTimeout(function() {
+        playSequence(seqContainer, loop);
+      }, sequenceDuration);
+    }
+
+    playTones(soundSeq, duration);
+  } catch(err) {
+
+  }
 }
 
 

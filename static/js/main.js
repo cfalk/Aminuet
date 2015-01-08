@@ -5,13 +5,15 @@ $(document).on("ready", function() {
 function makeNewSequence() {
   function musicControls() {
     return "<div class='musicControl'>"+
-            "<div active='true' class='button-play'></div>"+
+            "<div class='button-loop inactive'>&#8734;</div>"+
+            "<div class='button-play'></div>"+
             "</div>";
   }
 
   function sequenceContainer() {
     return "<div class='sequence'>"+
            "<textarea></textarea>"+
+           "<input class='bpm' title='BPM' value='120' type='number'/>"+
            musicControls()+
            "<div class='soundTranslation'></div>"+
            "</div>";
@@ -27,6 +29,11 @@ function makeNewSequence() {
 }
 $("#button-newSequence").click(makeNewSequence);
 $("#button-playAll").click(playAllSequences);
+
+$(document).on("click", ".button-loop", function() {
+  $(this).toggleClass("active");
+  $(this).toggleClass("inactive");
+});
 
 $(document).on("click", ".button-play", function() {
   var $seqContainer = $(this).closest(".sequence");
