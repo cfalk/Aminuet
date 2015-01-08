@@ -5,14 +5,14 @@ $(document).on("ready", function() {
 function makeNewSequence() {
   function musicControls() {
     return "<div class='musicControl'>"+
-            "<div active='true' class='button-play'>Play</div>"+
+            "<div active='true' class='button-play'></div>"+
             "</div>";
   }
 
   function sequenceContainer() {
     return "<div class='sequence'>"+
-           musicControls()+
            "<textarea></textarea>"+
+           musicControls()+
            "<div class='soundTranslation'></div>"+
            "</div>";
   }

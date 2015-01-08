@@ -66,27 +66,27 @@ var codonToAAMap = {
 }
 
 var AAToSoundMap = {
-  "alanine":"C3",
-  "leucine":"D3",
-  "aspartic acid":"E3",
-  "valine":"F3",
-  "serine":"G3",
-  "threonine":"A4",
-  "glycine":"B4",
-  "arginine":"C4",
-  "asparagine":"D4",
-  "cysteine":"E4",
-  "glutamic acid":"F4",
-  "glutamine":"G4",
-  "histidine":"A5",
-  "isoleucine":"B5",
-  "lysine":"C5",
-  "methionine":"D5",
-  "phenylalanine":"E5",
-  "proline":"F5",
-  "tryptophan":"G5",
-  "tyrosine":"A6",
-  "stop codon":"B6"
+  "alanine":"C2",
+  "leucine":"D2",
+  "aspartic acid":"E2",
+  "valine":"F2",
+  "serine":"G2",
+  "threonine":"A3",
+  "glycine":"B3",
+  "arginine":"C3",
+  "asparagine":"D3",
+  "cysteine":"E3",
+  "glutamic acid":"F3",
+  "glutamine":"G3",
+  "histidine":"A4",
+  "isoleucine":"B4",
+  "lysine":"C4",
+  "methionine":"D4",
+  "phenylalanine":"E4",
+  "proline":"F4",
+  "tryptophan":"G4",
+  "tyrosine":"A5",
+  "stop codon":"B5"
 };
 
 

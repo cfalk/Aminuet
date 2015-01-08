@@ -7,15 +7,26 @@ function playTone(tone, duration) {
   if (tone===undefined) throw "No tone specified!";
 
   // Largely based on code from: http://patorjk.com/blog/2012/07/22/tone-playing-experiment-with-html5s-web-audio-api/
+  var gain = audioContext.createGain();
   var oscillator = audioContext.createOscillator();
+
+  // Apply a gain so that the sound "fades" out.
+  var decay = duration*0.8/1000;
+  gain.connect(audioContext.destination)
+  gain.gain.setValueAtTime(1, audioContext.currentTime);
+  gain.gain.linearRampToValueAtTime(0.5, audioContext.currentTime+decay);
+  gain.gain.linearRampToValueAtTime(0.2, audioContext.currentTime+duration/1000);
+
   oscillator.frequency.value = toneToFrequencyMap[tone];
   oscillator.type = "square";
-  oscillator.connect(audioContext.destination);
-  oscillator.noteOn && oscillator.noteOn(0);
+  oscillator.connect(gain);
+  oscillator.start(0);
 
   // Kill the sound after a certain duration.
   setTimeout(function() {
-    oscillator.disconnect();
+    oscillator.stop(0);
+    oscillator.disconnect(gain);
+    gain.disconnect(audioContext.destination);
   }, duration);
 }
 
