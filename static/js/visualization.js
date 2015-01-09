@@ -51,8 +51,8 @@ function stepVisual(seqContainer) {
     var $next = $current.next(".visualBox");
     if ($next.length) {
       $next.addClass("active");
+      return;
     }
-  } else {
-    $visual.find(".visualBox:first").addClass("active");
   }
+  $visual.find(".visualBox:first").addClass("active");
 }

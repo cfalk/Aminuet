@@ -33,6 +33,15 @@ $("#button-playAll").click(playAllSequences);
 $(document).on("click", ".button-loop", function() {
   $(this).toggleClass("active");
   $(this).toggleClass("inactive");
+  if ($(this).hasClass("inactive")) {
+    clearTimeout($(this).closest(".sequence").data("loopCall"));
+  }
+});
+
+$(document).on("click", ".button-stop", function() {
+  var $seqContainer = $(this).closest(".sequence");
+  stopSequence($seqContainer);
+  $(this).removeClass("button-stop").addClass("button-play");
 });
 
 $(document).on("click", ".button-play", function() {
@@ -44,6 +53,8 @@ $(document).on("change", ".bpm", function() {
   var val = $(this).val();
   if (val>260) $(this).val(260);
   if (val<1) $(this).val(1);
+  var $seqContainer = $(this).closest(".sequence");
+  stopSequence($seqContainer)
 });
 
 // Initial Page Setup

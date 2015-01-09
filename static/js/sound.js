@@ -5,7 +5,7 @@ var audioContext = new webkitAudioContext();
 
 function playTone(tone, duration) {
   if (tone===undefined) throw "No tone specified!";
-  if (tone==="--") return; // "--" is used to indicate a rest.
+  if (tone==="--") return []; // "--" is used to indicate a rest.
 
   // Largely based on code from: http://patorjk.com/blog/2012/07/22/tone-playing-experiment-with-html5s-web-audio-api/
   var gain = audioContext.createGain();
@@ -25,35 +25,63 @@ function playTone(tone, duration) {
 
   // Kill the sound after a certain duration.
   setTimeout(function() {
-    oscillator.stop(0);
-    oscillator.disconnect(gain);
-    gain.disconnect(audioContext.destination);
+    killOscillator(oscillator, gain);
   }, duration);
+
+  // Return the oscillator/gain so it can be killed outside this function.
+  return [oscillator, gain]
 }
 
+function killOscillator(osc, gain) {
+  osc.stop(0);
+  osc.disconnect(gain);
+  gain.disconnect(audioContext.destination);
+}
 
-function playTones(toneSeq, duration, seqContainer) {
-  if (seqContainer!==undefined) {
-    stepVisual(seqContainer);
+function stopSequence(seqContainer) {
+  var $seqContainer = $(seqContainer);
+  try {
+    var osc = $seqContainer.data("oscillator");
+    var gain = $seqContainer.data("gain");
+    killOscillator(osc, gain);
+  } catch (err) {
+    // Oscillator is already killed.
   }
 
-  playTone(toneSeq.shift(), duration);
+  clearTimeout($seqContainer.data("nextTone"));
+  clearVisual($seqContainer);
+}
 
-  setTimeout(function() {
+function playTones(toneSeq, duration, $seqContainer) {
+  var toneTuple = playTone(toneSeq.shift(), duration);
+
+  var nextTone = setTimeout(function() {
     if (toneSeq.length) {
-      playTones(toneSeq, duration, seqContainer);
-    } else {
-      if (seqContainer!==undefined) clearVisual(seqContainer);
+      playTones(toneSeq, duration, $seqContainer);
+    } else if ($seqContainer!==undefined) {
+      var loop = $seqContainer.find(".button-loop").hasClass("active");
+      if (loop) {
+        playSequence($seqContainer);
+      } else {
+        clearVisual($seqContainer);
+        $(".button-stop").removeClass("button-stop").addClass("button-play");
+      }
     }
   }, duration);
+
+  if ($seqContainer!==undefined) {
+    stepVisual($seqContainer);
+    $seqContainer.find(".button-play").removeClass("button-play")
+                                      .addClass("button-stop");
+    $seqContainer.data("oscillator", toneTuple[0]);
+    $seqContainer.data("gain", toneTuple[1]);
+    $seqContainer.data("nextTone", nextTone);
+  }
 }
 
 
 function playSequence(seqContainer) {
   var $seqContainer = $(seqContainer);
-
-  // See if this sequence should be looped.
-  var loop = $seqContainer.find(".button-loop").hasClass("active");
 
   // Calculate the duration of each note in this sequence.
   var bpm = $seqContainer.find(".bpm").val();
@@ -62,15 +90,6 @@ function playSequence(seqContainer) {
 
   try {
     var soundSeq = $seqContainer.data("soundSeq").slice();
-
-    // Call the function after if `loop` is true.
-    if (loop) {
-      var sequenceDuration = soundSeq.length*duration;
-      setTimeout(function() {
-        playSequence(seqContainer, loop);
-      }, sequenceDuration);
-    }
-
     playTones(soundSeq, duration, $seqContainer);
   } catch(err) {
     console.log(err);
@@ -80,6 +99,9 @@ function playSequence(seqContainer) {
 
 function playAllSequences() {
   $(".sequence").each(function() {
-    playSequence(this);
+    // Play any sequences that are not already playing.
+    if ($(this).find(".button-play").length){
+      playSequence(this);
+    }
   });
 }

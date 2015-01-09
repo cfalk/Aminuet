@@ -72,22 +72,23 @@ body {
  font-size:1.4em;
  line-height:1em;
 }
-.musicControl .button-play, #button-playAll {
- border-top: 15px solid transparent;
- border-left: 30px solid #051938;
- border-bottom: 15px solid transparent;
- display:inline-block;
- opacity:0.6;
-}
-#button-newSequence {
- display:inline-block;
- font-size:3em;
- line-height:30px;
- vertical-align:top;
-}
 div[class^="button-"]:hover, div[id^="button-"]:hover {
  opacity:0.8;
  cursor:pointer;
+}
+
+.musicControl .button-stop:before{
+  content:"\25A0";
+}
+.musicControl .button-play:before, #button-playAll:before {
+ content:"\25B6";
+ opacity:0.6;
+}
+
+#button-newSequence, #button-playAll {
+ display:inline-block;
+ font-size:2em;
+ vertical-align:top;
 }
 
 
