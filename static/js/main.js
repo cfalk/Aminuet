@@ -29,6 +29,7 @@ function makeNewSequence() {
 }
 $("#button-newSequence").click(makeNewSequence);
 $("#button-playAll").click(playAllSequences);
+$("#button-stopAll").click(stopAllSequences);
 
 $(document).on("click", ".button-loop", function() {
   $(this).toggleClass("active");

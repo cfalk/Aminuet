@@ -48,6 +48,9 @@ function stopSequence(seqContainer) {
     // Oscillator is already killed.
   }
 
+  // Turn the stop button into a play button.
+  $(".button-stop").removeClass("button-stop").addClass("button-play");
+
   clearTimeout($seqContainer.data("nextTone"));
   clearVisual($seqContainer);
 }
@@ -64,11 +67,11 @@ function playTones(toneSeq, duration, $seqContainer) {
         playSequence($seqContainer);
       } else {
         clearVisual($seqContainer);
-        $(".button-stop").removeClass("button-stop").addClass("button-play");
       }
     }
   }, duration);
 
+  // If a `.sequence` is passed, store the current state of it.
   if ($seqContainer!==undefined) {
     stepVisual($seqContainer);
     $seqContainer.find(".button-play").removeClass("button-play")
@@ -96,6 +99,11 @@ function playSequence(seqContainer) {
   }
 }
 
+function stopAllSequences() {
+  $(".sequence").each(function() {
+    stopSequence($(this));
+  });
+}
 
 function playAllSequences() {
   $(".sequence").each(function() {
