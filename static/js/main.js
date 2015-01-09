@@ -42,7 +42,6 @@ $(document).on("click", ".button-loop", function() {
 $(document).on("click", ".button-stop", function() {
   var $seqContainer = $(this).closest(".sequence");
   stopSequence($seqContainer);
-  $(this).removeClass("button-stop").addClass("button-play");
 });
 
 $(document).on("click", ".button-play", function() {

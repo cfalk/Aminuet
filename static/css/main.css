@@ -21,7 +21,10 @@ body {
 }
 
 #globalMusicControl {
+ background-color:#152D54;
  margin:1em;
+ padding:1em 2em 1.5em 2em;
+ display:inline-block;
 }
 
 .sequence {
@@ -100,7 +103,6 @@ div[class^="button-"]:hover, div[id^="button-"]:hover {
 }
 .musicControl .button-play:before, #button-playAll:before {
  content:"\25B6";
- opacity:0.6;
 }
 
 

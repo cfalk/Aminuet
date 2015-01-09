@@ -49,14 +49,16 @@ function stopSequence(seqContainer) {
   }
 
   // Turn the stop button into a play button.
-  $(".button-stop").removeClass("button-stop").addClass("button-play");
+  $seqContainer.find(".button-stop").removeClass("button-stop")
+                                       .addClass("button-play");
 
   clearTimeout($seqContainer.data("nextTone"));
   clearVisual($seqContainer);
 }
 
 function playTones(toneSeq, duration, $seqContainer) {
-  var toneTuple = playTone(toneSeq.shift(), duration);
+  var tone = toneSeq.shift();
+  var toneTuple = playTone(tone, duration);
 
   var nextTone = setTimeout(function() {
     if (toneSeq.length) {
@@ -66,7 +68,7 @@ function playTones(toneSeq, duration, $seqContainer) {
       if (loop) {
         playSequence($seqContainer);
       } else {
-        clearVisual($seqContainer);
+        stopSequence($seqContainer);
       }
     }
   }, duration);
