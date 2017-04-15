@@ -1,6 +1,6 @@
 
 // Create one global context.
-var audioContext = new webkitAudioContext();
+var audioContext = new AudioContext();
 
 
 function playTone(tone, duration) {
